@@ -6,12 +6,12 @@ set -euo pipefail
 here=$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)
 case ${1:-} in
   [hH][tT][tT][pP]://*|[hH][tT][tT][pP][sS]://*)
-    exec /usr/bin/python3 "$here/open-host-url.py" "$@"
+    exec python3 "$here/open-host-url.py" "$@"
     ;;
   [fF][iI][lL][eE]://*|/*)
-    exec /usr/bin/python3 "$here/open-host-file.py" "$@"
+    exec python3 "$here/open-host-file.py" "$@"
     ;;
   *)
-    exec /usr/bin/xdg-open "$@"
+    exec "${SPARK_HOST_XDG_OPEN:-/usr/bin/xdg-open}" "$@"
     ;;
 esac

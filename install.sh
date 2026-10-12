@@ -11,6 +11,10 @@
 # Get the installer from the official release notes:
 #   https://sparkmailapp.com/spark3/win/changelog
 # Confirm the version and URL there. Do not trust a hardcoded link.
+#
+# Environment overrides:
+#   SPARK_SKIP_DEPS     space-separated commands to skip in the preflight check
+#   SPARK_SKIP_HANDLER  1 skips install-handler.sh
 set -euo pipefail
 
 root=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
@@ -32,6 +36,7 @@ deps=$'bwrap:bubblewrap\npython3:python\nbsdtar:libarchive\nclang:clang\nobjdump
 missing=
 while IFS=: read -r cmd pkg; do
   [ -z "$cmd" ] && continue
+  case " ${SPARK_SKIP_DEPS:-} " in *" $cmd "*) continue ;; esac
   if ! command -v "$cmd" >/dev/null 2>&1; then
     missing="$missing  $cmd (pacman -S $pkg)"$'\n'
   fi
@@ -132,7 +137,7 @@ OUT_DIR="$app" "$root/shims/build.sh"
   echo 'warning: image paste and window recovery support were not built.' >&2
 python3 "$root/shims/patch-foundation.py"
 python3 "$root/shims/patch-iphlpapi.py"
-"$root/install-handler.sh"
+[ "${SPARK_SKIP_HANDLER:-0}" = 1 ] || "$root/install-handler.sh"
 "$root/bin/register-host-filetypes.sh"
 
 echo

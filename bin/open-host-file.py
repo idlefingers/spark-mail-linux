@@ -63,7 +63,7 @@ def open_file(path):
         ['systemd-run', '--user', '--collect', '--quiet', '--service-type=exec',
          '--expand-environment=no', '--property=StandardOutput=null',
          '--property=StandardError=null', '--description=Spark host open',
-         '--', '/usr/bin/xdg-open', path],
+         '--', os.environ.get('SPARK_HOST_XDG_OPEN', '/usr/bin/xdg-open'), path],
         check=True, stdin=subprocess.DEVNULL, stdout=subprocess.DEVNULL,
         stderr=subprocess.DEVNULL, timeout=10)
 

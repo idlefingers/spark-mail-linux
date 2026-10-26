@@ -6,7 +6,7 @@ Run [Spark Mail](https://sparkmailapp.com/) for Windows on Linux with Wine.
 Two small DLL shims prevent known crashes. Scripts handle launch, browser login, and native notifications.
 
 - **Unofficial.** Readdle does not support this project.
-- **Verified:** Spark 3.31.5.141153 starts on Arch Linux with Wine 11.16.
+- **Verified:** Spark 3.32.1.141358 starts on Arch Linux with Wine 11.16.
 - **CLI:** The bundled Windows CLI works through [bin/spark](bin/spark). Spark Desktop must remain open.
 - **Updates:** Follow the [update procedure](AGENTS.md#update-spark), not Spark’s update button.
 
@@ -69,6 +69,13 @@ Version 3.31.2 has passed desktop startup, notification watcher, and read-only C
 Version 3.31.3 has passed desktop startup, notification watcher, and read-only CLI checks. Its mail, calendar, and attachment operations still need separate checks.
 Version 3.31.4.141104 has passed desktop startup, notification watcher, and read-only CLI account checks with CLI 1.3.1.
 Version 3.31.5.141153 has passed desktop startup, notification watcher, and read-only CLI account checks with CLI 1.4.0.
+Version 3.31.6.141244 has passed desktop startup, notification watcher, and read-only CLI account checks with CLI 1.4.0.
+Version 3.32.0.141284 has passed desktop startup, notification watcher, and read-only CLI account checks with CLI 1.4.0.
+
+Version 3.32.1.141358 passes desktop startup checks, loads SparkCore, and keeps the notification watcher active.
+CLI 1.4.1 passes help, version, and read-only account checks against the existing account state.
+Mail, calendar, attachment, and notification delivery checks remain unverified for this version.
+
 The host browser check passes, and host clipboard text matches Wine's clipboard when Spark has focus.
 With the image watcher, `Ctrl+V` pastes an image into a draft. Without the watcher, the image does not appear.
 DOCX, XLSX, and CSV attachments in a draft open in the host desktop applications.
